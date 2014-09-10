@@ -2,54 +2,33 @@
 <html lang="en" data-framework="backbonejs">
 	<head>
 		<meta charset="utf-8">
-		<title>BlueMix ToDos</title>
+		<title>Simple Form Entry</title>
 		<link rel="stylesheet" href="bower_components/todomvc-common/base.css">
 		<link rel="icon" href="images/bluemix-icon.png">
+		<script>
+			function createNewItem() {
+				title = $("#title-field").val()
+				data = {
+					"title": title,
+					"order": 4,
+					"completed": false
+				};
+				$.ajax({
+					  url: "/add",
+					  data: data,
+					  dataType: "json",
+					  method: 'get'
+					}).done(function() {
+					  alert('"' + title + '" has been added to mongo')
+					});
+			}
+		</script>
 	</head>
 	<body>
-		<section id="todoapp">
-			<header id="header">
-				<h1>(bluemix) todos</h1>
-				<input id="new-todo" placeholder="Loading..." autofocus>
-			</header>
-			<section id="main">
-				<input id="toggle-all" type="checkbox">
-				<label for="toggle-all">Mark all as complete</label>
-				<ul id="todo-list"></ul>
-			</section>
-			<footer id="footer"></footer>
-		</section>
-		<footer id="info">
-			<p>Double-click to edit a todo</p>
-			<p>Originally written by <a href="https://github.com/addyosmani">Addy Osmani</a></p>
-			<p>Additions of <a href="http://ace.ng.bluemix.net">BlueMix</a> functionality made by BlueMix Dev Advocate Team.</p>
-			<p>Originally part of <a href="http://todomvc.com">TodoMVC</a></p>
-		</footer>
-		<script type="text/template" id="item-template">
-			<div class="view">
-				<input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
-				<label><%- title %></label>
-				<button class="destroy"></button>
-			</div>
-			<input class="edit" value="<%- title %>">
-		</script>
-		<script type="text/template" id="stats-template">
-			<span id="todo-count"><strong><%= remaining %></strong> <%= remaining === 1 ? 'item' : 'items' %> left</span>
-			<ul id="filters">
-				<li>
-					<a class="selected" href="#/">All</a>
-				</li>
-				<li>
-					<a href="#/active">Active</a>
-				</li>
-				<li>
-					<a href="#/completed">Completed</a>
-				</li>
-			</ul>
-			<% if (completed) { %>
-			<button id="clear-completed">Clear completed (<%= completed %>)</button>
-			<% } %>
-		</script>
+		<form name="my-form" method="post" action="">
+			<input id="title-field" type="text" name="title">
+		</form>
+		<button onClick="createNewItem()">Submit</button>
 		<script src="bower_components/todomvc-common/base.js"></script>
 		<script src="//code.jquery.com/jquery-2.0.0.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>

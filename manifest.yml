@@ -14,12 +14,13 @@
 # limitations under the License.
 #
 applications:
-- name:      bluemix-todo-node-mongo
+- name:      jason-todo2
 
 # you may need to use a different hostname, if someone has already used this one
 
-  host:      bluemix-todo-node-mongo
-  command:   node server --verbose -d mongo
+  host:      jason-todo2
+  domain:    mybluemix.net
+  command:   node server --verbose
   memory:    128M
   services:
   - todo-mongo-db
